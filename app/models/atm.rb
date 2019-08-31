@@ -1,0 +1,2 @@
+class ATM < ApplicationRecord
+end
