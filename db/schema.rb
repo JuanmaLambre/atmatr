@@ -12,7 +12,7 @@
 
 ActiveRecord::Schema.define(version: 2019_08_31_181330) do
 
-  create_table "atms", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "atms", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci", force: :cascade do |t|
     t.float "long"
     t.float "lat"
     t.string "bank"
