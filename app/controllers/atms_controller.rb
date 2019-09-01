@@ -22,14 +22,14 @@ class AtmsController < ApplicationController
   end
 
   def networks
-    render json: ATM.select('DISTINCT network')
+    render json: ATM.pluck(:network).uniq
   end
 
   def banks
     check_params([:network])
     network = params[:network]
     atms = ATM.where(:network => network) if network
-    render json: atms.select('DISTINCT bank')
+    render json: atms.pluck(:bank).uniq
   end
 
   private
