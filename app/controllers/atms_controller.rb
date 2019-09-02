@@ -29,7 +29,7 @@ class AtmsController < ApplicationController
     check_params([:network])
     network = params[:network]
     atms = ATM.where(:network => network) if network
-    render json: atms.pluck(:bank).uniq
+    render json: atms.pluck(:bank).uniq.sort_by!{ |e| e.downcase }
   end
 
   private
@@ -38,12 +38,12 @@ class AtmsController < ApplicationController
       required_params.each do |p|
         params.require(p)
       end
-    rescue ActionController::ParameterMissing => error
-      render json: {
-        status: :error,
-        message: error,
-        suggestion: 'You can use values range=500 lat=-34.5879346 long=-58.3831004'
-      }, status: 400
+      rescue ActionController::ParameterMissing => error
+        render json: {
+          status: :error,
+          message: error,
+          suggestion: 'You can use values range=500 lat=-34.5879346 long=-58.3831004'
+        }, status: 400
     end
 
 end
